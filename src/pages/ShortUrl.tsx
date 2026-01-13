@@ -14,16 +14,26 @@ const ShortUrl = () => {
   const [loading, setLoading] = useState(false);
 
   const openUrlDescription = async (shortUrl: string) => {
-    const token = localStorage.getItem("token")
-    if (!token) return
+    const token = localStorage.getItem("token");
+    if (!token) return;
 
-    const res = await axios.get(`/api/analytics/${shortUrl}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-    console.log(res.data);
-  }
+    try {
+      const res = await axios.get(`/api/analytics/${shortUrl}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      console.log(res.data);
+
+      // ✅ UPDATE STATE HERE
+      setAnalytics(res.data);
+
+    } catch (error) {
+      console.error("Failed to fetch analytics:", error);
+      alert("Failed to load analytics");
+    }
+  };
 
   const handleShorten = async () => {
     const token = localStorage.getItem("token");
