@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import Auth from './pages/Auth'
 import ShortUrl from './pages/ShortUrl'
 import { useAppContext } from './context/AppContext';
